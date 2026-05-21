@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/article_detail.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="article-container">
+    <!-- 文章标题和基本信息 -->
+    <h1 class="article-title">{{ article.title }}</h1>
+    <div class="article-meta">
+        <span class="article-author">作者：{{ article.author.username }}</span>
+        <span class="article-time">发表于：{{ article.create_time.strftime('%Y-%m-%d %H:%M') }}</span>
+    </div>
+    <!-- 文章内容 -->
+    <div class="article-content">
+        {{ article.content }}
+        {% if article.image_url %}
+        <div class="article-image">
+            <img src="{{ article.image_url }}" alt="文章配图">
+        </div>
+        {% endif %}
+    </div>
+    <!-- 评论区 -->
+    <div class="comments-section">
+        <h2>评论区</h2>
+        <!-- 登录后显示评论输入框 -->
+        {% if g.user %}
+        <div class="comment-form">
+            <form method="POST" action="{{ url_for('content.add_comment', article_id=article.id) }}">
+                <textarea name="content" placeholder="写下你的评论..." required></textarea>
+                <button type="submit">发表评论</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="login-notice">
+            <a href="{{ url_for('stocker.login') }}">登录</a>后才能发表评论
+        </div>
+        {% endif %}
+        <!-- 评论列表 -->
+        <div class="comments-list">
+            {% if comments %}
+                {% for comment in comments %}
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <div class="comment-user">
+                            <img src="{{ url_for('static', filename='images/default_avatar.png') }}" class="user-avatar" alt="用户头像">
+                            <div class="user-info">
+                                <span class="comment-author">{{ comment.author.username }}</span>
+                                <span class="comment-time">{{ comment.create_time.strftime('%Y-%m-%d %H:%M') }}</span>
+                            </div>
+                        </div>
+                        <!-- 删除按钮 -->
+                        {% if g.user and g.user.id == comment.author_id %}
+                        <div class="delete-comment">
+                            <a href="#" class="delete-btn" data-comment-id="{{ comment.id }}">×</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="comment-content">
+                        {{ comment.content }}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-comments">
+                    暂无评论
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<script>
+document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        if(confirm('确定要删除这条评论吗？')) {
+            const commentId = this.dataset.commentId;
+            fetch(`/delete_comment/${commentId}`, {
+                method: 'POST'
+            }).then(response => response.json())
+            .then(data => {
+                if(data.code === 200) {
+                    this.closest('.comment-item').remove();
+                }
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
+

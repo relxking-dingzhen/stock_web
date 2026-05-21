@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}搜索结果{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/search_results.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="search-results">
+    <h2 class="search-header">搜索结果：{{ keyword }}</h2>
+    
+    {% if articles %}
+        <div class="article-list">
+            {% for article in articles %}
+            <div class="article-item">
+                <h3 class="article-title">
+                    <a href="{{ url_for('content.article_detail', article_id=article.id) }}">
+                        {{ article.title }}
+                    </a>
+                </h3>
+                <div class="article-meta">
+                    <span class="article-author">作者：{{ article.author.username }}</span>
+                    <span class="article-time">{{ article.create_time.strftime('%Y-%m-%d %H:%M') }}</span>
+                    <span class="article-section">板块：{{ {'stock_focus': '股市焦点', 'stock_community': '股吧', 'financial_news': '财经新闻'}[article.section] }}</span>
+                </div>
+                <p class="article-preview">{{ article.content[:200] }}...</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-results">
+            <p>未找到包含"{{ keyword }}"的文章</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

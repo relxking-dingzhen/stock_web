@@ -1,0 +1,84 @@
+.article-list {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.article-item {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.article-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.author-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.post-time {
+    font-size: 14px;
+    color: #999;
+}
+
+.article-title {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+.article-title:hover {
+    color: #1890ff;
+}
+
+.article-content {
+    margin-top: 10px;
+}
+
+.article-preview {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+    text-decoration: none;
+}
+
+.article-image {
+    width: 20%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: block;
+}
+
+.no-articles {
+    text-align: center;
+    padding: 100px 0;
+    color: #666;
+    font-size: 1.2em;
+}

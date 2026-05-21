@@ -1,0 +1,102 @@
+.manage-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.section-selector {
+    margin-bottom: 30px;
+}
+
+.section-selector select {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+}
+
+.article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.article-item {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.article-info {
+    flex: 1;
+}
+
+.article-title {
+    font-size: 18px;
+    color: #333;
+    margin: 0 0 10px 0;
+}
+
+.article-meta {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.article-meta span {
+    margin-right: 20px;
+}
+
+.article-preview {
+    color: #666;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.article-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.view-btn, .delete-btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+}
+
+.view-btn {
+    background: #e6f3ff;
+    color: #0066ff;
+    text-decoration: none;
+}
+
+.delete-btn {
+    background: #ffe6e6;
+    color: #ff4444;
+}
+
+.view-btn:hover {
+    background: #cce6ff;
+}
+
+.delete-btn:hover {
+    background: #ffcccc;
+}
+
+.no-articles {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

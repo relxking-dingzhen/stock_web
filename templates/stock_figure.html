@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ stock_code }}股票走势图{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/stock_figure.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="stock-container">
+    <h2 class="stock-title">{{ stock_code }} 股票走势图</h2>
+    <div class="figure-container">
+        {{ plot_html | safe }}
+    </div>
+</div>
+{% endblock %}

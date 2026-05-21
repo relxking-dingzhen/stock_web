@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}股吧{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/stock_community.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="article-list">
+    {% if articles %}
+        {% for article in articles %}
+        <div class="article-item">
+            <div class="article-header">
+                <img src="{{ url_for('static', filename='images/default_avatar.png') }}" class="author-avatar">
+                <div class="author-info">
+                    <span class="author-name">{{ article.author.username }}</span>
+                    <span class="post-time">发表于 {{ article.create_time.strftime('%Y-%m-%d %H:%M') }}</span>
+                </div>
+            </div>
+
+            {% if article.title %}
+            <a href="{{ url_for('content.article_detail', article_id=article.id) }}" class="article-title">{{ article.title }}</a>
+            {% endif %}
+
+            <div class="article-content">
+                <a href="{{ url_for('content.article_detail', article_id=article.id) }}" class="article-preview">{{ article.content }}</a>
+                {% if article.image_url %}
+                    {% for image_url in article.image_url.split(';')[:1] %}
+                    <img src="{{ article.image_url }}" class="article-image">
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-articles">
+            <p>当前未发表任何文章</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

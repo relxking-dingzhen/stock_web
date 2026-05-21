@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}登录{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="page-container">
+        <div class="register-container">
+            <form method="POST" action="{{ url_for('stocker.login') }}">
+                <!-- 邮箱输入 -->
+                <div class="form-group">
+                    <label for="exampleInputEmail1">邮箱</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+                    {% if email_error %}
+                        <small class="warning">{{ email_error }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- 密码输入 -->
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                    {% if password_error %}
+                        <small class="warning">{{ password_error }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- 提交按钮 -->
+                <button type="submit" class="btn btn-primary btn-block">登录</button>
+                
+                <!-- 注册链接 -->
+                <div class="register-link">
+                    <a href="{{ url_for('stocker.register') }}">没有账号？立即注册</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

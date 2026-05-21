@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}股市焦点{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/stock_focus.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="article-list">
+    {% if articles %}
+        {% for article in articles %}
+        <div class="article-item">
+            <a href="{{ url_for('content.article_detail', article_id=article.id) }}" class="article-title">
+                {{ article.title }}
+            </a>
+            <div class="article-preview">
+                {{ article.content[:200] }}...
+            </div>
+            <div class="article-meta">
+                <span class="article-author">作者：{{ article.author.username }}</span>
+                <span class="article-time">{{ article.create_time.strftime('%Y-%m-%d %H:%M') }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-articles">
+            <p>当前未发表任何文章</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

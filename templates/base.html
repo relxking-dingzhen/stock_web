@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <title>{% block title %}{% endblock %}-股票数据平台</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="header">
+        <!-- 左侧导航栏 -->
+        <div class="left-nav">
+            <a href="/" class="nav-button">首页</a>
+            <a href="{{ url_for('content.create_article') }}" class="nav-button">发布文章</a>
+            <a href="{{ url_for('stocker.manage_article') }}" class="nav-button">稿件管理</a>
+            <a href="{{ url_for('content.chat') }}" class="nav-button">AI分析师</a>
+        </div>
+        <!-- 搜索框-->
+        <div class="search-container">
+            <div class="search-wrapper">
+                <input type="text" class="search-box" id="searchInput" placeholder="请输入关键字或股票代码（深交所的公司加.sz后缀，上交所的公司加.sh后缀）">
+                <button class="search-button" onclick="searchStock()">搜索</button>
+            </div>
+        </div>
+        <!-- 右侧导航栏 -->
+        <div class="right-nav">
+            {% if session.get('user_id') %}
+                <span class="nav-button">{{ user.username }}</span>
+                <a href="{{ url_for('stocker.logout') }}" class="nav-button">退出登录</a>
+            {% else %}
+                <a href="{{ url_for('stocker.login') }}" class="nav-button">登录</a>
+                <a href="{{ url_for('stocker.register') }}" class="nav-button">注册</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="content-container">
+        {% block body %}{% endblock %}
+    </div>
+</body>
+{% block script %}{% endblock %}
+</html>

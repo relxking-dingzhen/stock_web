@@ -1,0 +1,147 @@
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+    margin-top: -80px;
+}
+
+.register-container {
+    max-width: 400px;
+    width: 90%;
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    font-size: 1rem;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.input-group .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.captcha-group {
+    position: relative;
+    width: 100%;
+}
+
+.captcha-group input {
+    width: 100%;
+    padding-right: 110px;
+}
+
+#captcha-btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    min-width: 100px;
+    font-size: 0.95rem;
+    padding: 6px 12px;
+    background: transparent;
+    border: none;
+    border-left: 1px solid #ddd;
+    border-radius: 0;
+    color: #666;
+    cursor: pointer;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#captcha-btn:hover {
+    color: #333;
+}
+
+.warning {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}
+
+.text-muted {
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background-color: #FF9999;
+    border: none;
+    padding: 8px 0;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    font-size: 0.95rem;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #FF8080;
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 153, 153, 0.25);
+}
+
+.input-group {
+    width: 100%;
+}
+
+.input-group .form-control {
+    width: 1%;
+    flex: 1 1 auto;
+}
+
+/* 添加响应式设计 */
+@media (max-width: 768px) {
+    .register-container {
+        margin: 20px;
+        padding: 15px;
+    }
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+} 

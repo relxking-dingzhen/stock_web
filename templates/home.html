@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}首页{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="top-spacing"></div>
+<div class="articles-grid">
+    <a href="{{ url_for('content.stock_focus') }}" class="article-card">
+        <h3 class="article-title">股市焦点</h3>
+        <p class="article-preview">关注股市动态，了解热门股票，把握投资机会</p>
+    </a>
+    
+    <a href="{{ url_for('content.stock_community') }}" class="article-card">
+        <h3 class="article-title">股吧</h3>
+        <p class="article-preview">交流投资策略，分享交易经验，探讨风险管理方法</p>
+    </a>
+    
+    <a href="{{ url_for('content.financial_news') }}" class="article-card">
+        <h3 class="article-title">财经新闻</h3>
+        <p class="article-preview">讨论最新财经动态，分析政策影响，把握市场脉搏</p>
+    </a>
+</div>
+{% endblock %}

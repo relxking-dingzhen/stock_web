@@ -1,0 +1,76 @@
+/* 文章网格布局 */
+.articles-grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* 文章卡片样式 */
+.article-card {
+    width: 300px;
+    height: 300px;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* 鼠标悬停时的效果 */
+.article-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.article-title {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.article-preview {
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.article-card:visited .article-title,
+.article-card:active .article-title,
+.article-card:hover .article-title {
+    color: #333;
+}
+
+.article-card:visited .article-preview,
+.article-card:active .article-preview,
+.article-card:hover .article-preview {
+    color: #666;
+}
+
+/* 响应式布局 */
+@media (max-width: 1000px) {
+    .articles-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .article-card {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+.top-spacing {
+    height: 150px;
+}

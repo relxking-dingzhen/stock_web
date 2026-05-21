@@ -1,0 +1,52 @@
+.stock-container {
+    width: 95%;
+    margin: 30px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stock-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.figure-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.stock-figure {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.error-message {
+    text-align: center;
+    color: #ff4444;
+    padding: 20px;
+    font-size: 16px;
+}
+
+/* 确保图表容器能完整显示 */
+.js-plotly-plot {
+    width: 100% !important;
+}
+
+/* 适配小屏幕 */
+@media (max-width: 768px) {
+    .stock-container {
+        margin: 15px;
+        padding: 15px;
+        width: 90%;
+    }
+    
+    .stock-title {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}稿件管理中心{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/manage_article.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="manage-container">
+    <div class="section-selector">
+        <select id="sectionSelect" onchange="changeSection(this.value)">
+            <option value="stock_focus" {% if current_section == 'stock_focus' %}selected{% endif %}>股市焦点</option>
+            <option value="stock_community" {% if current_section == 'stock_community' %}selected{% endif %}>股吧</option>
+            <option value="financial_news" {% if current_section == 'financial_news' %}selected{% endif %}>财经新闻</option>
+        </select>
+    </div>
+
+    <div class="article-list">
+        {% if articles %}
+            {% for article in articles %}
+            <div class="article-item">
+                <div class="article-info">
+                    <h3 class="article-title">
+                        {% if article.title %}
+                            {{ article.title }}
+                        {% else %}
+                            无标题
+                        {% endif %}
+                    </h3>
+                    <div class="article-meta">
+                        <span class="publish-time">发布时间：{{ article.create_time.strftime('%Y-%m-%d %H:%M') }}</span>
+                        <span class="article-section">板块：{{ {'stock_focus': '股市焦点', 'stock_community': '股吧', 'financial_news': '财经新闻'}[article.section] }}</span>
+                    </div>
+                    <p class="article-preview">{{ article.content[:100] }}...</p>
+                </div>
+                <div class="article-actions">
+                    <a href="{{ url_for('content.article_detail', article_id=article.id) }}" class="view-btn">查看</a>
+                    <button class="delete-btn" onclick="deleteArticle({{ article.id }})">删除</button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-articles">
+                <p>当前板块暂无文章</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function changeSection(section) {
+    window.location.href = "{{ url_for('stocker.manage_article') }}?section=" + section;
+}
+
+function deleteArticle(articleId) {
+    if (confirm('确定要删除这篇文章吗？')) {
+        fetch(`{{ url_for('content.delete_article', article_id=0) }}`.replace('0', articleId), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 200) {
+                // 删除成功，刷新页面
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('删除失败，请稍后重试');
+        });
+    }
+}
+</script>
+{% endblock %}

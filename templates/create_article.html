@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}发表文章{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create_sfarticle.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="article-form">
+    <form method="POST" enctype="multipart/form-data">
+        <div class="form-header">
+            <div class="section-select">
+                <label for="section">选择版块：</label>
+                <select name="section" id="section" class="section-dropdown" onchange="toggleTitleField()">
+                    <option value="stock_focus">股市焦点</option>
+                    <option value="stock_community">股吧</option>
+                    <option value="financial_news">财经新闻</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">发表文章</button>
+        </div>
+
+        <div class="form-group" id="titleGroup">
+            <label for="title" id="titleLabel">标题</label>
+            <input type="text" id="title" name="title" class="form-control" value="{{ form.title.data or '' }}">
+            {% if form.title.errors %}
+                {% for error in form.title.errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="content">内容</label>
+            <div class="content-wrapper">
+                <textarea id="content" name="content" class="form-control">{{ form.content.data or '' }}</textarea>
+                <div class="image-upload">
+                    <label for="image" class="image-upload-label" title="插入图片">
+                        <i class="fas fa-image"></i>
+                    </label>
+                    <input type="file" id="image" name="image" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <div class="image-preview" id="imagePreview"></div>
+            {% if form.content.errors %}
+                {% for error in form.content.errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+<script>
+function toggleTitleField() {
+    const section = document.getElementById('section').value;
+    const titleGroup = document.getElementById('titleGroup');
+    const titleInput = document.getElementById('title');
+    const titleLabel = document.getElementById('titleLabel');
+    
+    if (section === 'stock_community') {
+        titleLabel.textContent = '标题（选填）';
+        titleInput.required = false;
+    } else {
+        titleLabel.textContent = '标题';
+        titleInput.required = true;
+    }
+}
+
+document.getElementById('image').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = `
+                <div class="preview-item">
+                    <img src="${e.target.result}" class="preview-image">
+                    <button type="button" class="remove-image" onclick="removeImage()">×</button>
+                </div>
+            `;
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+function removeImage() {
+    document.getElementById('imagePreview').innerHTML = '';
+    document.getElementById('image').value = '';
+}
+
+// 页面加载时执行一次，确保初始状态正确
+document.addEventListener('DOMContentLoaded', toggleTitleField);
+</script>
+{% endblock %} 
